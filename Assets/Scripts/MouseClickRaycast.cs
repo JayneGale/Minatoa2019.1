@@ -9,6 +9,7 @@ public class MouseClickRaycast : MonoBehaviour {
 	public CharacterController playerController;
 	public bool buttonIsOn;
     public bool drawerIsOpen;
+    public float rayLength;
 	private MouseLook mouseLook;
 	private FirstPersonController rfpc;
 	private Ray ray;
@@ -36,10 +37,12 @@ public class MouseClickRaycast : MonoBehaviour {
 	{
 		RaycastHit hit;
 		ray = Camera.main.ScreenPointToRay (Input.mousePosition); 
-		if (Physics.Raycast (ray, out hit, 100.0f)) {
+		if (Physics.Raycast (ray, out hit, rayLength)) {
 			if (hit.collider.tag == "Button" || hit.collider.tag == "Drawer")
             {
-  //              Debug.Log("Ray is hitting the " + hit.transform.tag);
+ //               Debug.Log("Ray is hitting the " + hit.transform.tag);
+ //               Debug.Log("Ray is hitting the " + hit.collider.name);
+
                 cursorIsOver = true;
 				CursorTexture(mouseHand, hotSpot);
 				if (Input.GetMouseButtonDown(0)) 
